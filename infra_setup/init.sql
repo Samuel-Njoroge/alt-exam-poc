@@ -18,9 +18,14 @@ FROM '/data/products.csv' DELIMITER ',' CSV HEADER;
 -- setup customers table following the example above
 
 -- TODO: Provide the DDL statment to create this table ALT_SCHOOL.CUSTOMERS
+create table if not exists ALT_SCHOOL.CUSTOMERS
+(
+    
+);
 
 -- TODO: provide the command to copy the customers data in the /data folder into ALT_SCHOOL.CUSTOMERS
-
+COPY ALT_SCHOOL.CUSTOMERS ()
+FROM '/data/customers.csv' DELIMITER ',' CSV HEADER;
 
 
 -- TODO: complete the table DDL statement
