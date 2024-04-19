@@ -37,7 +37,8 @@ create table if not exists ALT_SCHOOL.ORDERS
 
 
 -- provide the command to copy orders data into POSTGRES
-
+COPY ALT_SCHOOL.ORDERS ()
+FROM '/data/orders.csv' DELIMITER ',' CSV HEADER;
 
 create table if not exists ALT_SCHOOL.LINE_ITEMS
 (
