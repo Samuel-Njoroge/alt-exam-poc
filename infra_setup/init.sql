@@ -48,7 +48,8 @@ create table if not exists ALT_SCHOOL.LINE_ITEMS
 
 
 -- provide the command to copy ALT_SCHOOL.LINE_ITEMS data into POSTGRES
-
+COPY ALT_SCHOOL.LINE_ITEMS ()
+FROM '/data/line_items.csv' DELIMITER ',' CSV HEADER;
 
 -- setup the events table following the examle provided
 create table if not exists ALT_SCHOOL.EVENTS
