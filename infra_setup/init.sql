@@ -58,6 +58,8 @@ create table if not exists ALT_SCHOOL.EVENTS
 );
 
 -- TODO: provide the command to copy ALT_SCHOOL.EVENTS data into POSTGRES
+COPY ALT_SCHOOL.EVENTS ()
+FROM '/data/events.csv' DELIMITER ',' CSV HEADER;
 
 
 
