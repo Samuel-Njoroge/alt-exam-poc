@@ -21,9 +21,9 @@ FROM '/data/products.csv' DELIMITER ',' CSV HEADER;
 create table if not exists ALT_SCHOOL.CUSTOMERS
 (
  customer_id uuid not null primary key,
- device_id uuid,
- location varchar,
- currency numeric(10, 2)
+ device_id uuid not null,
+ location varchar(255) not null,
+ currency varchar(5)
 );
 
 -- TODO: provide the command to copy the customers data in the /data folder into ALT_SCHOOL.CUSTOMERS
@@ -35,10 +35,9 @@ FROM '/data/customers.csv' DELIMITER ',' CSV HEADER;
 create table if not exists ALT_SCHOOL.ORDERS
 (
     order_id uuid not null primary key,
-    customer_id uuid,
-    status varchar,
+    customer_id uuid not null,
+    status varchar(255) not null,
     checked_out_at timestamp
-    -- provide the other fields
 );
 
 
@@ -48,10 +47,10 @@ FROM '/data/orders.csv' DELIMITER ',' CSV HEADER;
 
 create table if not exists ALT_SCHOOL.LINE_ITEMS
 (
-    line_item_id serial primary key,
-    order_id uuid,
-    item_id numeric,
-    quantity numeric
+    line_item_id serial serial primary key,
+    order_id uuid not null,
+    item_id numeric not null,
+    quantity numeric not null
     -- provide the remaining fields
 );
 
@@ -64,9 +63,9 @@ FROM '/data/line_items.csv' DELIMITER ',' CSV HEADER;
 create table if not exists ALT_SCHOOL.EVENTS
 (
     -- TODO: PROVIDE THE FIELDS
-    event_id serial primary key,
-    customer_id uuid,
-    event_data jsonb,
+    event_id serial serial primary key,
+    customer_id uuid not null,
+    event_data jsonb not null,
     event_timestamp timestamp
 );
 
