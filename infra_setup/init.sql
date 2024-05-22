@@ -18,39 +18,60 @@ FROM '/data/products.csv' DELIMITER ',' CSV HEADER;
 -- setup customers table following the example above
 
 -- TODO: Provide the DDL statment to create this table ALT_SCHOOL.CUSTOMERS
+create table if not exists ALT_SCHOOL.CUSTOMERS
+(
+ customer_id uuid not null primary key,
+ device_id uuid not null,
+ location varchar(255) not null,
+ currency varchar(5)
+);
 
 -- TODO: provide the command to copy the customers data in the /data folder into ALT_SCHOOL.CUSTOMERS
-
+COPY ALT_SCHOOL.CUSTOMERS (customer_id, device_id, location, currency)
+FROM '/data/customers.csv' DELIMITER ',' CSV HEADER;
 
 
 -- TODO: complete the table DDL statement
 create table if not exists ALT_SCHOOL.ORDERS
 (
     order_id uuid not null primary key,
-    -- provide the other fields
+    customer_id uuid not null,
+    status varchar(255) not null,
+    checked_out_at timestamp
 );
 
 
 -- provide the command to copy orders data into POSTGRES
-
+COPY ALT_SCHOOL.ORDERS (order_id, customer_id, status, checked_out_at)
+FROM '/data/orders.csv' DELIMITER ',' CSV HEADER;
 
 create table if not exists ALT_SCHOOL.LINE_ITEMS
 (
-    line_item_id serial primary key,
+    line_item_id serial serial primary key,
+    order_id uuid not null,
+    item_id numeric not null,
+    quantity numeric not null
     -- provide the remaining fields
 );
 
 
 -- provide the command to copy ALT_SCHOOL.LINE_ITEMS data into POSTGRES
+COPY ALT_SCHOOL.LINE_ITEMS (line_item_id, order_id, item_id, quantity)
+FROM '/data/line_items.csv' DELIMITER ',' CSV HEADER;
 
-
--- setup the events table following the examle provided
+-- setup the events table following the example provided
 create table if not exists ALT_SCHOOL.EVENTS
 (
     -- TODO: PROVIDE THE FIELDS
+    event_id serial serial primary key,
+    customer_id uuid not null,
+    event_data jsonb not null,
+    event_timestamp timestamp
 );
 
 -- TODO: provide the command to copy ALT_SCHOOL.EVENTS data into POSTGRES
+COPY ALT_SCHOOL.EVENTS (event_id, customer_id, event_data, event_timestamp)
+FROM '/data/events.csv' DELIMITER ',' CSV HEADER;
 
 
 
